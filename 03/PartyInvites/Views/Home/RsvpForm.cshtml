@@ -9,35 +9,39 @@
   <head>
     <meta name="viewport" content="width=device-width"/>
     <title>RsvpForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">
   </head>
 
   <body>
     <div>
-      <form asp-action="RsvpForm" method="post">
-        <div>
-          <label asp-for="Name">Your name:</label>
-          <input asp-for="Name"/>
+      <h5 class="bg-primary text-white text-center m-2 p-2">RSVP</h5>
+      <form asp-action="RsvpForm" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-group">
+          <label class="form-label" asp-for="Name">Your name:</label>
+          <input class="form-control" asp-for="Name"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" asp-for="Email">Your email:</label>
+          <input class="form-control" asp-for="Email" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" asp-for="Phone">Your phone:</label>
+          <input class="form-control" asp-for="Phone" />  
         </div>
 
         <div>
-          <label asp-for="Email">Your email:</label>
-          <input asp-for="Email" />
-        </div>
-
-        <div>
-          <label asp-for="Phone">Your phone:</label>
-          <input asp-for="Phone" />  
-        </div>
-
-        <div>
-          <label asp-for="WillAttend">Will you attend?</label>
-          <select asp-for="WillAttend">
+          <label class="form-label" asp-for="WillAttend">Will you attend?</label>
+          <select class="form-control" asp-for="WillAttend">
             <option value="">Choose an option</option>
             <option value="true">Yes, I'll be there</option>
             <option value="false">No, I can't come</option>
           </select>  
         </div>
-        <Button type="submit">Submit RSVP</Button>
+        <Button class="btn btn-primary mt-3" type="submit">Submit RSVP</Button>
       </form>
     </div>
   </body>
