@@ -102,7 +102,7 @@ namespace LanguageFeatures.Controllers
         public ViewResult HardCode()
         {
             var products = Product.GetProduct();
-            return View("Index", products.Select(p => $"Name: {p?.Name}, Price: {p?.Price}"));
+            return View("Index", products.Select(p => $"{nameof(p.Name)}: {p?.Name}, {nameof(p.Price)}: {p?.Price}"));
         }
     }
 }
