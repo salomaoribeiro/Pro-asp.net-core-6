@@ -7,14 +7,6 @@ namespace LanguageFeatures.Controllers
     {
         public ViewResult Index()
         {
-            //Product?[] products = Product.GetProduct();
-            //Product? product = products[0];
-
-            //string name = $"Product: {products[0]?.Name}, Price: {products[0]?.Price}";
-
-            //return View(new string[] { name });
-
-
             Dictionary<string, Product> products = new Dictionary<string, Product> {
               {"Kayak", new Product {Name = "Kayak", Price = 275M}},
               {"Lifejacket", new Product {Name = "Life Jacket", Price = 48.95M}}
@@ -61,12 +53,6 @@ namespace LanguageFeatures.Controllers
         }
 
 
-        //bool FilterByPrice(Product? p)
-        //{
-        //    return (p?.Price ?? 0) >= 20;
-        //}
-
-
         public ViewResult ExtensionMethod()
         {
             IProductSelection cart = new ShoppingCart(
@@ -76,37 +62,22 @@ namespace LanguageFeatures.Controllers
                   new Product { Name = "Corner Flag", Price = 34.95M }
             );
 
-
-            //Product[] productArray = {
-            //      new Product {Name = "Kayak", Price = 275M},
-            //      new Product {Name = "Life Jacket", Price = 48.95M},
-            //      new Product {Name = "Soccer Ball", Price = 19.50M},
-            //      new Product {Name = "Corner Flag", Price = 34.95M}
-            //};
-
-            //Func<Product?, bool> namefilter = delegate (Product? prod)
-            //{
-            //    return prod?.Name?[0] == 'S';
-            //}
-
-            //decimal cartTotal = cart.Filter(FilterByPrice).TotalPrices();
-            //decimal arrayTotal = productArray.FilterByPrice(20).TotalPrices();
-            //decimal nameFilterTotal = productArray.Filter(namefilter).TotalPrices();
-
-            //decimal cartTotal = cart.Filter(p => p?.Price >= 0).TotalPrices();
-            //decimal arrayTotal = productArray.Filter(p => (p?.Price ?? 0) > 20).TotalPrices();
-            //decimal nameFilterTotal = productArray.Filter(p => p?.Name[0] == 'S').TotalPrices();
-
-            //return View("Index", new string[] { $"Cart total: {cartTotal:C2}", $"Array total: {arrayTotal:C2}", $"By name total: {nameFilterTotal:C2}" });
-            //return View("Index", cart.Products?.Select(p => p?.Name));
             return View("Index", cart.Names);
         }
+
 
         public ViewResult Lambda()
         {
             return View("Index", Product.GetProduct().Select(p => p?.Name));
         }
 
+
         public ViewResult LambdaSimple() => View("Index", Product.GetProduct().Select(p => p?.Name));
+
+        public async Task<ViewResult> IndexTask()
+        {
+            long? length = await MyAsyncMethods.GetPageLength();
+            return View("Index", new string[] { $"Length: {length}" });
+        }
     }
 }
