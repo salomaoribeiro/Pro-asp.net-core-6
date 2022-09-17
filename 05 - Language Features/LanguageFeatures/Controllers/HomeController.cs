@@ -98,5 +98,11 @@ namespace LanguageFeatures.Controllers
                 output.Add($"Page length: {len}");
             return View("Index", output);
         }
+
+        public ViewResult HardCode()
+        {
+            var products = Product.GetProduct();
+            return View("Index", products.Select(p => $"Name: {p?.Name}, Price: {p?.Price}"));
+        }
     }
 }
